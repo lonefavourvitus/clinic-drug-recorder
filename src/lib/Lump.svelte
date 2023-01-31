@@ -1,26 +1,29 @@
 <script>
-	import {
-		drugStore,
-		drugStore_hydracP,
-		drugStore_jawasil,
-		drugStore_emtrisil,
-		newone
-	} from '../stores';
-	export const allDrugStores = [
-		drugStore,
-		drugStore_hydracP,
-		drugStore_jawasil,
-		drugStore_emtrisil,
-		newone
-	];
-	import Lump from '$lib/Lump.svelte';
+	import DrugAsAUnit from '$lib/DrugAsAUnit.svelte';
+	import { fade } from 'svelte/transition';
+	export let oneDrugStore;
+	$: totalAmountInUnits = $oneDrugStore.length;
+	$: totalAmountInNaira = $oneDrugStore.reduce((a, { price }) => a + price, 0);
 </script>
 
 <main>
-	<main class="main-container">
-		{#each allDrugStores as aDrugStore}
-			<Lump oneDrugStore={aDrugStore} />
-		{/each}
+	<main class="drug-title"><h2>DRUG BRAND HERE</h2></main>
+
+	{#each $oneDrugStore as drug, i (drug.id)}
+		<div transition:fade>
+			<!-- <p>{i + 1}</p> -->
+			<DrugAsAUnit unit={drug} />
+		</div>
+	{/each}
+	<main class="total-amount-container">
+		<div class="p-container1">
+			<p class="p1">T.A In Units:</p>
+			<p class="p2">{totalAmountInUnits}</p>
+		</div>
+		<div class="p-container2">
+			<p class="p3">T.A In Naira:</p>
+			<p class="p4">{totalAmountInNaira}</p>
+		</div>
 	</main>
 </main>
 
@@ -70,6 +73,7 @@
 		border-radius: 10px 0px 0 10px;
 		border-right: 2px solid hsla(100, 100%, 20%, 1);
 		padding: 5px;
+		/* font-size: 0.7rem; */
 	}
 	.p4 {
 		background: hsla(100, 50%, 65%, 1);
@@ -82,6 +86,7 @@
 		padding: 5px;
 		border-right: unset;
 		background: hsla(100, 50%, 85%, 1);
+		/* align-items: center; */
 		justify-content: space-between !important;
 		margin: 0;
 	}
@@ -89,6 +94,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		/* width: 100%; */
 		padding: 0 3px;
 	}
 	.drug-title {

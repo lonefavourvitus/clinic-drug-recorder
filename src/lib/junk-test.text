@@ -1,0 +1,83 @@
+<main class="main-container">
+	<main>
+		<main class="drug-title"><h2>HYDRAC P</h2></main>
+
+		{#each $drugStore_hydracP as drug, i (drug.id)}
+			<div transition:fade>
+				<!-- <p>{i + 1}</p> -->
+				<DrugAsAUnit unit={drug} />
+			</div>
+		{/each}
+
+		<main class="total-amount-container">
+			<div class="p-container1">
+				<p class="p1">T.A In Units:</p>
+				<!-- <p class="p2">{totalAmountInUnitsHydracP}</p> -->
+			</div>
+			<div class="p-container2">
+				<p class="p3">T.A In Naira:</p>
+				<!-- <p class="p4">{totalAmountInNairaHydracP}</p> -->
+			</div>
+		</main>
+	</main>
+	<main>
+		<main class="drug-title"><h2>JAWASIL DECLOFENAC</h2></main>
+
+		{#each $drugStore_jawasil as drug, i (drug.id)}
+			<!-- <p>{drug.price}</p> -->
+			<div transition:fade>
+				<DrugAsAUnit unit={drug} />
+			</div>
+		{/each}
+		<main class="total-amount-container">
+			<div class="p-container1">
+				<p class="p1">T.A In Units:</p>
+				<!-- <p class="p2">{totalAmountInUnitsJawasil}</p> -->
+			</div>
+			<div class="p-container2">
+				<p class="p3">T.A In Naira:</p>
+				<!-- <p class="p4">{totalAmountInNairaJawasil}</p> -->
+			</div>
+		</main>
+	</main>
+	<main>
+		<main class="drug-title"><h2>EMTRISIL A.S</h2></main>
+
+		{#each $drugStore_emtrisil as drug, i (drug.id)}
+			<!-- <p>{drug.price}</p> -->
+			<div transition:fade>
+				<DrugAsAUnit unit={drug} />
+			</div>
+		{/each}
+		<main class="total-amount-container">
+			<div class="p-container1">
+				<p class="p1">T.A In Units:</p>
+				<!-- <p class="p2">{totalAmountInUnitsEmtrisil}</p> -->
+			</div>
+			<div class="p-container2">
+				<p class="p3">T.A In Naira:</p>
+				<!-- <p class="p4">{totalAmountInNairaEmtrisil}</p> -->
+			</div>
+		</main>
+	</main>
+	<main>
+		<main class="drug-title"><h2>NEWONE</h2></main>
+
+		{#each $newone as drug, i (drug.id)}
+			<!-- <p>{drug.price}</p> -->
+			<div transition:fade>
+				<DrugAsAUnit unit={drug} />
+			</div>
+		{/each}
+		<main class="total-amount-container">
+			<div class="p-container1">
+				<p class="p1">T.A In Units:</p>
+				<!-- <p class="p2">{totalAmountInUnitsEmtrisil}</p> -->
+			</div>
+			<div class="p-container2">
+				<p class="p3">T.A In Naira:</p>
+				<!-- <p class="p4">{totalAmountInNairaEmtrisil}</p> -->
+			</div>
+		</main>
+	</main>
+</main>

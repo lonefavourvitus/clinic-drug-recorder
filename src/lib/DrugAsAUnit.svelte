@@ -1,5 +1,4 @@
 <script>
-	// import { drugStore, drugStore_hydracP, drugStore_jawasil } from '../stores';
 	import { handleDrugRemoval } from '$lib/HandleDrugRemovalFunction.svelte';
 	export let unit;
 	export let n = 1;

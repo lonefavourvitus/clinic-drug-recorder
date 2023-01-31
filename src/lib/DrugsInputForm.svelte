@@ -1,35 +1,43 @@
 <script>
 	import { v4 as uuidv4 } from 'uuid';
-	import { drugStore, drugStore_hydracP, drugStore_jawasil } from '../stores';
+	import {
+		drugStore,
+		drugStore_hydracP,
+		drugStore_jawasil,
+		drugStore_emtrisil,
+		newone
+	} from '../stores';
 	let drugName = '';
-	let message;
-	function sharpo(druName, drugStre) {
-		drugName = druName;
-		let newDrugInput = {
-			id: uuidv4(),
-			drugName,
-			price: 300
-		};
-		drugName = '';
-
-		drugStre.update((currentDrug) => {
-			return [newDrugInput, ...currentDrug];
-		});
-	}
+	let message = null;
 	function handleSubmit() {
-		if (drugName == 'gsk' || drugName == 'ren') {
-			sharpo('GSK antacid suspension', drugStore);
-		} else {
-			if (drugName == 'hydrac' || drugName == 'short') {
-				sharpo('Hydrac P', drugStore_hydracP);
+		function handleSubmitDrugValues(typedName, altName, mainName, drugStoreName, price) {
+			if (drugName == typedName || drugName == altName) {
+				drugName = mainName;
+				let newDrugInput = {
+					id: uuidv4(),
+					drugName,
+					price
+				};
+				console.log(drugName, drugStoreName);
+
+				drugName = '';
+				message = null;
+
+				drugStoreName.update((currentDrug) => {
+					return [newDrugInput, ...currentDrug];
+				});
+				console.log('yay');
 			} else {
-				if (drugName == 'jawasil' || drugName == 'jawa') {
-					sharpo('Jawasil Declofenac', drugStore_jawasil);
-				} else {
-					message = `Drug name is incorrect, not accepted!`;
-				}
+				message = `Drug name is incorrect, not accepted!`;
+				// console.log('wrong input');
 			}
 		}
+
+		handleSubmitDrugValues('gsk', 'ren', 'GSK antacid suspension', drugStore, 500);
+		handleSubmitDrugValues('hydrac', 'ren', 'Hydrac P', drugStore_hydracP, 300);
+		handleSubmitDrugValues('jawa', 'ren', 'JAWASIL DECLOFENAC', drugStore_jawasil, 900);
+		handleSubmitDrugValues('emtrisil', 'ren', 'EMTRISIL A.S', drugStore_emtrisil, 700);
+		handleSubmitDrugValues('new', 'ren', 'new one', newone, 400);
 	}
 </script>
 
@@ -37,13 +45,26 @@
 	<p class="message">{message}</p>
 {/if}
 <form on:submit|preventDefault={handleSubmit}>
-	<!-- Rating Select -->
 	<div class="input-group">
 		<input type="text" bind:value={drugName} placeholder="input drug name..." />
 		<button type="submit">Submit</button>
+		<nav>
+			SOME ------------------------- OPTIONS ------------------------- WILL
+			------------------------- BE ------------------------- HERE
+		</nav>
 	</div>
 </form>
 
+<!-- <form on:submit|preventDefault={newInput}>
+	<div class="input-group">
+		<input type="text" bind:value={a} placeholder="input drug name..." />
+		<input type="text" bind:value={b} placeholder="input drug name..." />
+		<input type="text" bind:value={c} placeholder="input drug name..." />
+		<input type="text" bind:value={d} placeholder="input drug name..." />
+		<input type="number" bind:value={e} placeholder="input drug name..." />
+		<button type="submit">Submit</button>
+	</div>
+</form> -->
 <style>
 	.message {
 		background: hsla(0, 100%, 85%, 1);
@@ -60,15 +81,24 @@
 		left: 5px;
 		text-align: center;
 	}
+	nav {
+		background-color: hsla(222, 50%, 90%, 1);
+		/* width: 66vw; */
+		padding: 10px;
+		margin-left: 6rem;
+		color: hsla(0, 0%, 25%, 1);
+		border-radius: 5px;
+		text-align: center;
+	}
+
 	form {
-		width: 20vw;
-		position: absolute;
-		/* margin: 1rem 1rem 1rem 0.6rem; */
+		padding: 0;
+		margin: 0;
+		/* background: hsla(222, 50%, 80%, 1); */
+
+		width: 100vw;
 		border: none;
 		display: flex;
-		bottom: 5px;
-		left: 5px;
-		/* border-top: 1px solid red; */
 	}
 	input {
 		width: 20vw;
@@ -103,5 +133,9 @@
 	}
 	.input-group {
 		display: flex;
+		/* margin: 3rem; */
+		padding: 10px;
+		align-items: center;
+		justify-content: center;
 	}
 </style>

@@ -1,32 +1,28 @@
 <script context="module">
-	import { drugStore, drugStore_hydracP, drugStore_jawasil } from '../stores';
+	import {
+		drugStore,
+		drugStore_hydracP,
+		drugStore_jawasil,
+		drugStore_emtrisil,
+		newone
+	} from '../stores';
 	export let unit;
 	export let n = 1;
 
 	export function handleDrugRemoval(drugId) {
-		if (
-			drugStore.update((currentDrug) => {
-				return currentDrug.filter((drug) => drug.id != drugId);
-			})
-		);
-		else {
+		function drugSpecifier(drugToBeRemoved) {
 			if (
-				drugStore_hydracP.update((currentDrug) => {
+				drugToBeRemoved.update((currentDrug) => {
 					return currentDrug.filter((drug) => drug.id != drugId);
 				})
 			);
-			else {
-				if (
-					drugStore_jawasil.update((currentDrug) => {
-						return currentDrug.filter((drug) => drug.id != drugId);
-					})
-				);
-			}
 		}
+		let drugToBeRemovedArray = [
+			drugSpecifier(drugStore),
+			drugSpecifier(drugStore_hydracP),
+			drugSpecifier(drugStore_jawasil),
+			drugSpecifier(drugStore_emtrisil),
+			drugSpecifier(newone)
+		];
 	}
-	// function retuerner() {
-	// 	return currentDrug.filter((drug) => drug.id != drugId);
-	// }
-
-	// console.log(retuerner());
 </script>
