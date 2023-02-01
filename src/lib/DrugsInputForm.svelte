@@ -7,37 +7,44 @@
 		drugStore_emtrisil,
 		newone
 	} from '../stores';
-	let drugName = '';
+
+	export let drugName = '';
 	let message = null;
 	function handleSubmit() {
-		function handleSubmitDrugValues(typedName, altName, mainName, drugStoreName, price) {
-			if (drugName == typedName || drugName == altName) {
-				drugName = mainName;
-				let newDrugInput = {
-					id: uuidv4(),
-					drugName,
-					price
-				};
-				console.log(drugName, drugStoreName);
-
-				drugName = '';
-				message = null;
-
-				drugStoreName.update((currentDrug) => {
-					return [newDrugInput, ...currentDrug];
-				});
-				console.log('yay');
+		function perplexedByThisWrapperFunction(anyName) {
+			if (drugName === anyName) {
+				function seriouslyConfusedHere(typedName, altName, mainName, drugStoreName, price) {
+					handleSubmitDrugValues(typedName, altName, mainName, drugStoreName, price);
+				}
 			} else {
 				message = `Drug name is incorrect, not accepted!`;
-				// console.log('wrong input');
 			}
 		}
+		perplexedByThisWrapperFunction('gsk');
+		handleSubmitDrugValues('gsk', 'ren', 'gsk antacid suspension', drugStore, 500);
+		handleSubmitDrugValues('hydrac', 'hy', 'Hydrac P', drugStore_hydracP, 300);
+		handleSubmitDrugValues('jawa', 'ja', 'jawasil declofenac', drugStore_jawasil, 900);
+		handleSubmitDrugValues('emtrisil', 'emt', 'emtrisil', drugStore_emtrisil, 700);
+		handleSubmitDrugValues('winart', 'win', 'winart forte', newone, 400);
+	}
+	function handleSubmitDrugValues(typedName, altName, mainName, drugStoreName, price) {
+		if (drugName == typedName || drugName == altName) {
+			drugName = mainName;
+			let newDrugInput = {
+				id: uuidv4(),
+				drugName,
+				price
+			};
+			console.log(drugName, drugStoreName);
 
-		handleSubmitDrugValues('gsk', 'ren', 'GSK antacid suspension', drugStore, 500);
-		handleSubmitDrugValues('hydrac', 'ren', 'Hydrac P', drugStore_hydracP, 300);
-		handleSubmitDrugValues('jawa', 'ren', 'JAWASIL DECLOFENAC', drugStore_jawasil, 900);
-		handleSubmitDrugValues('emtrisil', 'ren', 'EMTRISIL A.S', drugStore_emtrisil, 700);
-		handleSubmitDrugValues('new', 'ren', 'new one', newone, 400);
+			drugName = '';
+			message = null;
+
+			drugStoreName.update((currentDrug) => {
+				return [newDrugInput, ...currentDrug];
+			});
+			console.log('yay');
+		}
 	}
 </script>
 
