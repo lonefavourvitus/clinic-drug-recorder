@@ -7,5 +7,6 @@
 	<div>
 		<DrugsInputForm />
 	</div>
+
 	<DrugList />
 </main>

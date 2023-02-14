@@ -1,33 +1,17 @@
 <script>
 	import { v4 as uuidv4 } from 'uuid';
-	import {
-		drugStore,
-		drugStore_hydracP,
-		drugStore_jawasil,
-		drugStore_emtrisil,
-		newone
-	} from '../stores';
-
+	import { drugStorem, drugs } from '../stores';
 	export let drugName = '';
+	// export let iddy = null;
+	let typedName = '';
+	let altName = '';
+	let mainName = '';
+	let price;
 	let message = null;
-	function handleSubmit() {
-		function perplexedByThisWrapperFunction(anyName) {
-			if (drugName === anyName) {
-				function seriouslyConfusedHere(typedName, altName, mainName, drugStoreName, price) {
-					handleSubmitDrugValues(typedName, altName, mainName, drugStoreName, price);
-				}
-			} else {
-				message = `Drug name is incorrect, not accepted!`;
-			}
-		}
-		perplexedByThisWrapperFunction('gsk');
-		handleSubmitDrugValues('gsk', 'ren', 'gsk antacid suspension', drugStore, 500);
-		handleSubmitDrugValues('hydrac', 'hy', 'Hydrac P', drugStore_hydracP, 300);
-		handleSubmitDrugValues('jawa', 'ja', 'jawasil declofenac', drugStore_jawasil, 900);
-		handleSubmitDrugValues('emtrisil', 'emt', 'emtrisil', drugStore_emtrisil, 700);
-		handleSubmitDrugValues('winart', 'win', 'winart forte', newone, 400);
-	}
-	function handleSubmitDrugValues(typedName, altName, mainName, drugStoreName, price) {
+	let brandName = '';
+	console.log($drugs);
+	// $: console.log(iddy);
+	function handleSubmitDrugValues(typedName, altName, mainName, price) {
 		if (drugName == typedName || drugName == altName) {
 			drugName = mainName;
 			let newDrugInput = {
@@ -35,16 +19,53 @@
 				drugName,
 				price
 			};
-			console.log(drugName, drugStoreName);
+
+			console.log('hehe');
 
 			drugName = '';
 			message = null;
 
-			drugStoreName.update((currentDrug) => {
-				return [newDrugInput, ...currentDrug];
+			drugStorem.update((currentDrugs) => {
+				const index = currentDrugs.findIndex(
+					(drug) => drug[1][0] === typedName || drug[1][0] === altName
+				);
+				const newDrugs = [...currentDrugs];
+				newDrugs[index][2].push(newDrugInput);
+				console.log(index);
+				return newDrugs;
 			});
-			console.log('yay');
+
+			return { typedName, altName, mainName, price }, iddy;
 		}
+	}
+	function handleSubmit() {
+		if (drugName == typedName || drugName == altName) {
+			handleSubmitDrugValues(typedName, altName, mainName, price);
+		} else {
+			message = `Drug name is incorrect, not accepted!`;
+		}
+		// $drugs.push([typedName, altName, mainName, price]);
+		$drugs.forEach((drug) => {
+			handleSubmitDrugValues(...drug);
+		});
+	}
+
+	function addNewDrug() {
+		drugStorem.update((newArray) => {
+			newArray.push([[brandName], [typedName], []]);
+			console.log(newArray.length);
+			$drugs.push([typedName, altName, mainName, price]),
+				$drugs.forEach((drug) => {
+					handleSubmitDrugValues(...drug);
+				});
+			console.log('inside addnewdrug', $drugs);
+			return newArray;
+		});
+		brandName = '';
+		typedName = '';
+		altName = '';
+		mainName = '';
+		price = '';
 	}
 </script>
 
@@ -54,6 +75,7 @@
 <form on:submit|preventDefault={handleSubmit}>
 	<div class="input-group">
 		<input type="text" bind:value={drugName} placeholder="input drug name..." />
+
 		<button type="submit">Submit</button>
 		<nav>
 			SOME ------------------------- OPTIONS ------------------------- WILL
@@ -61,14 +83,22 @@
 		</nav>
 	</div>
 </form>
+<div>
+	<input type="text" bind:value={brandName} placeholder="Enter Brand Name" />
+
+	<input type="text" bind:value={typedName} placeholder="Enter Typed Name" />
+	<input type="text" bind:value={altName} placeholder="Enter Alternate Name" />
+	<input type="text" bind:value={mainName} placeholder="Enter Main Name" />
+	<input type="number" bind:value={price} placeholder="Enter Price" />
+	<button on:click={addNewDrug}>Add Drug</button>
+</div>
 
 <!-- <form on:submit|preventDefault={newInput}>
 	<div class="input-group">
-		<input type="text" bind:value={a} placeholder="input drug name..." />
-		<input type="text" bind:value={b} placeholder="input drug name..." />
-		<input type="text" bind:value={c} placeholder="input drug name..." />
-		<input type="text" bind:value={d} placeholder="input drug name..." />
-		<input type="number" bind:value={e} placeholder="input drug name..." />
+		<input type="text" bind:value={drugName} placeholder="input drug name..." />
+		<input type="text" bind:value={altName} placeholder="input drug name..." />
+		<input type="text" bind:value={mainName} placeholder="input drug name..." />
+		<input type="number" bind:value={price} placeholder="input drug name..." />
 		<button type="submit">Submit</button>
 	</div>
 </form> -->
@@ -81,7 +111,6 @@
 		display: flex;
 		width: 23vw;
 		position: absolute;
-		/* margin: 1rem 1rem 1rem 0.6rem; */
 		border: none;
 		display: flex;
 		bottom: 40px;
@@ -90,7 +119,6 @@
 	}
 	nav {
 		background-color: hsla(222, 50%, 90%, 1);
-		/* width: 66vw; */
 		padding: 10px;
 		margin-left: 6rem;
 		color: hsla(0, 0%, 25%, 1);
@@ -101,7 +129,6 @@
 	form {
 		padding: 0;
 		margin: 0;
-		/* background: hsla(222, 50%, 80%, 1); */
 
 		width: 100vw;
 		border: none;
@@ -110,7 +137,6 @@
 	input {
 		width: 20vw;
 		border: none;
-		/* border-top: 1px solid red; */
 		background: hsla(222, 50%, 90%, 1);
 		padding: 10px;
 		transition: all ease-in-out 0.3s;
@@ -140,7 +166,6 @@
 	}
 	.input-group {
 		display: flex;
-		/* margin: 3rem; */
 		padding: 10px;
 		align-items: center;
 		justify-content: center;

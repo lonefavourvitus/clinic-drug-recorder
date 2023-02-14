@@ -80,4 +80,44 @@
 			</div>
 		</main>
 	</main>
+</main><!-- {#each testy as nn}
+		<h2>{nn.drug}</h2>
+	{/each} -->
+
+
+
+
+	<script>
+	import DrugAsAUnit from '$lib/DrugAsAUnit.svelte';
+	import { fade } from 'svelte/transition';
+
+	export let oneDrugStore = [];
+	export let drugBrand = ['klkl'];
+	$: totalAmountInUnits = $oneDrugStore.length;
+	$: totalAmountInNaira = $oneDrugStore.reduce((a, { price }) => a + price, 0);
+	const time = new Date().toLocaleTimeString();
+	console.log(time);
+</script>
+
+<main>
+	<main class="drug-title">
+		<h2>{drugBrand}</h2>
+	</main>
+
+	{#each $oneDrugStore as drug, i (drug)}
+		<div transition:fade>
+			<!-- <p>{i + 1}</p> -->
+			<DrugAsAUnit unit={drug} />
+		</div>
+	{/each}
+	<main class="total-amount-container">
+		<div class="p-container1">
+			<p class="p1">T.A In Units:</p>
+			<p class="p2">{totalAmountInUnits}</p>
+		</div>
+		<div class="p-container2">
+			<p class="p3">T.A In Naira:</p>
+			<p class="p4">{totalAmountInNaira}</p>
+		</div>
+	</main>
 </main>

@@ -1,28 +1,17 @@
 <script context="module">
-	import {
-		drugStore,
-		drugStore_hydracP,
-		drugStore_jawasil,
-		drugStore_emtrisil,
-		newone
-	} from '../stores';
-	export let unit;
-	export let n = 1;
+	import { drugStorem } from '../stores';
 
 	export function handleDrugRemoval(drugId) {
-		function drugSpecifier(drugToBeRemoved) {
-			if (
-				drugToBeRemoved.update((currentDrug) => {
-					return currentDrug.filter((drug) => drug.id != drugId);
-				})
-			);
-		}
-		let drugToBeRemovedArray = [
-			drugSpecifier(drugStore),
-			drugSpecifier(drugStore_hydracP),
-			drugSpecifier(drugStore_jawasil),
-			drugSpecifier(drugStore_emtrisil),
-			drugSpecifier(newone)
-		];
+		drugStorem.update((currentDrugs) => {
+			return currentDrugs.map((drug) => {
+				// return [drug[0], drug[1], drug[2].filter((entry) => entry.id !== drugId)];
+				return [drug[0], drug[1], drug[2].filter((entry) => entry.id !== drugId)];
+			});
+		});
 	}
 </script>
+
+<!-- <script context="module">
+	import { drugStorem } from '../stores';
+	export let unit;
+	export let n = 1; -->

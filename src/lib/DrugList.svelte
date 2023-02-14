@@ -1,24 +1,14 @@
 <script>
-	import {
-		drugStore,
-		drugStore_hydracP,
-		drugStore_jawasil,
-		drugStore_emtrisil,
-		newone
-	} from '../stores';
-	export const allDrugStores = [
-		drugStore,
-		drugStore_hydracP,
-		drugStore_jawasil,
-		drugStore_emtrisil,
-		newone
-	];
+	import { drugStorem } from '../stores';
 	import Lump from '$lib/Lump.svelte';
 </script>
 
 <main>
+	<main class="drug-title" />
 	<main class="main-container">
-		{#each allDrugStores as aDrugStore}
+		<main class="drug-title" />
+		{#each $drugStorem as aDrugStore}
+			<!-- <Lump id={aDrugStore.title} oneDrugStore={aDrugStore} /> -->
 			<Lump oneDrugStore={aDrugStore} />
 		{/each}
 	</main>
@@ -92,6 +82,7 @@
 		padding: 0 3px;
 	}
 	.drug-title {
+		display: flex;
 		padding: 0;
 		border: none;
 		background: hsla(222, 50%, 80%, 1);
