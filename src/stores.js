@@ -8,7 +8,13 @@ export const drugStorem = writable([
     [['HYDRAC P'], ['hydrac'], []],
     [['COUGH EXPECTORANT'], ['cough'], []],
     [['LUMEFANTRINE 500MG'], ['lume'], []],
-    [['WINART FORTE'], ['win'], []]
+    [['WINART FORTE1'], ['win1'], []],
+    [['WINART FORTE2'], ['win2'], []],
+    [['WINART FORTE3'], ['win3'], []],
+    [['WINART FORTE4'], ['win4'], []],
+    [['WINART FORTE5'], ['win5'], []],
+    [['WINART FORTE6'], ['win6'], []],
+    [['WINART FORTE7'], ['win7'], []],
 ])
 
 export const drugs = writable([
@@ -16,7 +22,13 @@ export const drugs = writable([
     ['hydrac', 'hy', 'Hydrac P', 300],
     ['cough', 'co', 'coughy', 900],
     ['lume', 'emt', 'lumefantrine', 700],
-    ['winart', 'win', 'winart forte', 400]
+    ['winart1', 'win1', 'winart forte1', 400],
+    ['winart2', 'win2', 'winart forte2', 400],
+    ['winart3', 'win3', 'winart forte3', 400],
+    ['winart4', 'win4', 'winart forte4', 400],
+    ['winart5', 'win5', 'winart forte5', 400],
+    ['winart6', 'win6', 'winart forte6', 400],
+    ['winart7', 'win7', 'winart forte7', 400],
 ]);
 
 // export const drugStore = writable([])

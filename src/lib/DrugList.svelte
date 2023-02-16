@@ -3,10 +3,8 @@
 	import Lump from '$lib/Lump.svelte';
 </script>
 
-<main>
-	<main class="drug-title" />
+<main class="mainy">
 	<main class="main-container">
-		<main class="drug-title" />
 		{#each $drugStorem as aDrugStore}
 			<!-- <Lump id={aDrugStore.title} oneDrugStore={aDrugStore} /> -->
 			<Lump oneDrugStore={aDrugStore} />
@@ -18,83 +16,17 @@
 	.main-container {
 		display: flex;
 		justify-content: center;
+
+		background: hsla(222, 50%, 75%, 1);
 	}
 	main {
-		border-right: 2px solid hsla(222, 50%, 75%, 1);
-		padding: 0 3px;
+		gap: 2px;
 	}
-	main:last-child {
-		border: none;
-	}
-	.p-container1 {
+	.mainy {
+		width: 99.3vw;
 		display: flex;
-		border-radius: 10px;
-		align-items: center;
-		justify-content: start;
-		padding-left: 6px !important;
-	}
-	.p-container2 {
-		display: flex;
-		border-radius: 10px;
-		align-items: center;
-		padding-right: 6px !important;
-		justify-content: end;
-	}
-	p {
-		margin: 0.3rem 0;
-		font-size: 0.95rem;
-	}
-	.p1 {
-		background: hsla(100, 50%, 70%, 1);
-		border-radius: 10px 0px 0 10px;
-		border-right: 2px solid hsla(100, 100%, 20%, 1);
-		padding: 5px;
-	}
-	.p2 {
-		background: hsla(100, 50%, 65%, 1);
-		border-radius: 0 10px 10px 0;
-		padding: 5px;
-	}
-	.p3 {
-		background: hsla(100, 50%, 70%, 1);
-		border-radius: 10px 0px 0 10px;
-		border-right: 2px solid hsla(100, 100%, 20%, 1);
-		padding: 5px;
-	}
-	.p4 {
-		background: hsla(100, 50%, 65%, 1);
-		border-radius: 0 10px 10px 0;
-		padding: 5px;
-	}
-	.total-amount-container {
-		border-bottom: 1px solid hsla(0, 0%, 70%, 1);
-		display: flex;
-		padding: 5px;
-		border-right: unset;
-		background: hsla(100, 50%, 85%, 1);
-		justify-content: space-between !important;
-		margin: 0;
-	}
-	.total-amount-container div {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 0 3px;
-	}
-	.drug-title {
-		display: flex;
-		padding: 0;
-		border: none;
-		background: hsla(222, 50%, 80%, 1);
-	}
-	h2 {
-		margin: 0;
-		color: hsla(0, 0%, 25%, 1);
-		padding: 2px;
-		text-align: center;
-		font-size: 0.85rem;
-		border: unset;
-		letter-spacing: 1px;
-		font-weight: 500;
+		overflow: scroll;
+		margin: 5px;
+		/* width: 10000px; */
 	}
 </style>

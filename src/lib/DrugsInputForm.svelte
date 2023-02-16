@@ -1,6 +1,12 @@
 <script>
 	import { v4 as uuidv4 } from 'uuid';
 	import { drugStorem, drugs } from '../stores';
+
+	// import { gg } from '$lib/Func.svelte';
+
+	import MenuAndOptionsLabel from '$lib/MenuAndOptionsLabel.svelte';
+
+	// import { c } from '$lib/Lump.svelte';
 	export let drugName = '';
 	// export let iddy = null;
 	let typedName = '';
@@ -35,7 +41,7 @@
 				return newDrugs;
 			});
 
-			return { typedName, altName, mainName, price }, iddy;
+			return { typedName, altName, mainName, price };
 		}
 	}
 	function handleSubmit() {
@@ -61,11 +67,11 @@
 			console.log('inside addnewdrug', $drugs);
 			return newArray;
 		});
-		brandName = '';
-		typedName = '';
-		altName = '';
-		mainName = '';
-		price = '';
+		// brandName = '';
+		// typedName = '';
+		// altName = '';
+		// mainName = '';
+		// price = '';
 	}
 </script>
 
@@ -75,15 +81,11 @@
 <form on:submit|preventDefault={handleSubmit}>
 	<div class="input-group">
 		<input type="text" bind:value={drugName} placeholder="input drug name..." />
-
-		<button type="submit">Submit</button>
-		<nav>
-			SOME ------------------------- OPTIONS ------------------------- WILL
-			------------------------- BE ------------------------- HERE
-		</nav>
 	</div>
+	<button type="submit">Submit</button>
 </form>
-<div>
+<MenuAndOptionsLabel />
+<!-- <div>
 	<input type="text" bind:value={brandName} placeholder="Enter Brand Name" />
 
 	<input type="text" bind:value={typedName} placeholder="Enter Typed Name" />
@@ -91,7 +93,7 @@
 	<input type="text" bind:value={mainName} placeholder="Enter Main Name" />
 	<input type="number" bind:value={price} placeholder="Enter Price" />
 	<button on:click={addNewDrug}>Add Drug</button>
-</div>
+</div> -->
 
 <!-- <form on:submit|preventDefault={newInput}>
 	<div class="input-group">
@@ -129,7 +131,7 @@
 	form {
 		padding: 0;
 		margin: 0;
-
+		/* position: fixed; */
 		width: 100vw;
 		border: none;
 		display: flex;
