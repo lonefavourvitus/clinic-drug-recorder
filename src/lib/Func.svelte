@@ -1,13 +1,16 @@
 <script context="module">
-	export const qq = aa;
-	export const gg = { behavior: 'smooth' };
-	console.log(gg);
+	export let time;
+	export const nodeUnitFunction = smoothAutoScrollToggler;
+	export const scrollBehaviourProperty = { behavior: 'smooth' };
+	console.log(scrollBehaviourProperty);
 
-	function aa(node, options = {}) {
+	function smoothAutoScrollToggler(node, options = {}) {
+		time = new Date().toLocaleTimeString();
+
 		const nodeId = node.getAttribute('id');
 
 		const scrollOptions = {
-			behavior: gg.behavior || 'smooth',
+			behavior: scrollBehaviourProperty.behavior || 'smooth',
 			...options
 		};
 
@@ -19,6 +22,7 @@
 		}, 4000);
 		console.log(nodeId);
 		console.log('Node', nodeId, 'is mounted');
+		console.log(new Date().toLocaleTimeString());
 
 		return {
 			destroy() {

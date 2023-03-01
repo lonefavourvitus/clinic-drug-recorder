@@ -1,7 +1,7 @@
 <script>
 	import { v4 as uuidv4 } from 'uuid';
-	import { drugStorem, drugs } from '../stores';
-
+	import { drugStore, drugProperties } from '../stores';
+	import ThemeToggler from '$lib/ThemeToggler.svelte';
 	// import { gg } from '$lib/Func.svelte';
 
 	import MenuAndOptionsLabel from '$lib/MenuAndOptionsLabel.svelte';
@@ -15,7 +15,7 @@
 	let price;
 	let message = null;
 	let brandName = '';
-	console.log($drugs);
+	console.log($drugProperties);
 	// $: console.log(iddy);
 	function handleSubmitDrugValues(typedName, altName, mainName, price) {
 		if (drugName == typedName || drugName == altName) {
@@ -31,7 +31,7 @@
 			drugName = '';
 			message = null;
 
-			drugStorem.update((currentDrugs) => {
+			drugStore.update((currentDrugs) => {
 				const index = currentDrugs.findIndex(
 					(drug) => drug[1][0] === typedName || drug[1][0] === altName
 				);
@@ -51,20 +51,20 @@
 			message = `Drug name is incorrect, not accepted!`;
 		}
 		// $drugs.push([typedName, altName, mainName, price]);
-		$drugs.forEach((drug) => {
+		$drugProperties.forEach((drug) => {
 			handleSubmitDrugValues(...drug);
 		});
 	}
 
 	function addNewDrug() {
-		drugStorem.update((newArray) => {
+		drugStore.update((newArray) => {
 			newArray.push([[brandName], [typedName], []]);
 			console.log(newArray.length);
-			$drugs.push([typedName, altName, mainName, price]),
-				$drugs.forEach((drug) => {
+			$drugProperties.push([typedName, altName, mainName, price]),
+				$drugProperties.forEach((drug) => {
 					handleSubmitDrugValues(...drug);
 				});
-			console.log('inside addnewdrug', $drugs);
+			console.log('inside addnewdrug', $drugProperties);
 			return newArray;
 		});
 		// brandName = '';
@@ -73,18 +73,26 @@
 		// mainName = '';
 		// price = '';
 	}
+	let darkyMessage = 1;
+	let darkyInput = 1;
+	let darkyButtonAndP = 1;
 </script>
 
 {#if message}
-	<p class="message">{message}</p>
+	<p class="message" class:darkyMessage>{message}</p>
 {/if}
-<form on:submit|preventDefault={handleSubmit}>
-	<div class="input-group">
-		<input type="text" bind:value={drugName} placeholder="input drug name..." />
-	</div>
-	<button type="submit">Submit</button>
-</form>
-<MenuAndOptionsLabel />
+<main>
+	<form on:submit|preventDefault={handleSubmit}>
+		<div class="input-group">
+			<input class:darkyInput type="text" bind:value={drugName} placeholder="input drug name..." />
+		</div>
+		<div class="input-group submit-button">
+			<button class:darkyButtonAndP type="submit">Submit</button>
+		</div>
+	</form>
+	<ThemeToggler />
+	<MenuAndOptionsLabel />
+</main>
 <!-- <div>
 	<input type="text" bind:value={brandName} placeholder="Enter Brand Name" />
 
@@ -105,6 +113,15 @@
 	</div>
 </form> -->
 <style>
+	main {
+		display: flex;
+		width: 100vw;
+		/* position: fixed; */
+		/* position: relative; */
+	}
+	.input-group.submit-button {
+		transform: translateX(-12px);
+	}
 	.message {
 		background: hsla(0, 100%, 85%, 1);
 		color: hsla(0, 100%, 35%, 1);
@@ -119,14 +136,18 @@
 		left: 5px;
 		text-align: center;
 	}
-	nav {
+	.darkyMessage {
+		background: hsla(0, 100%, 15%, 1);
+		/* color: hsla(0, 100%, 5%, 1); */
+	}
+	/* nav {
 		background-color: hsla(222, 50%, 90%, 1);
 		padding: 10px;
 		margin-left: 6rem;
 		color: hsla(0, 0%, 25%, 1);
 		border-radius: 5px;
 		text-align: center;
-	}
+	} */
 
 	form {
 		padding: 0;
@@ -144,9 +165,15 @@
 		transition: all ease-in-out 0.3s;
 		border-radius: 5px;
 	}
+	.darkyInput {
+		background: hsla(222, 50%, 20%, 1);
+	}
 	input:hover {
 		background: hsla(222, 50%, 80%, 1);
 		transition: all ease-in-out 0.3s;
+	}
+	.darkyInput:hover {
+		background: hsla(222, 50%, 10%, 1);
 	}
 	button {
 		background: hsla(222, 50%, 85%, 1);
@@ -171,5 +198,11 @@
 		padding: 10px;
 		align-items: center;
 		justify-content: center;
+	}
+	.darkyButtonAndP {
+		background: hsla(222, 50%, 15%, 1);
+	}
+	.darkyButtonAndP:hover:not(p) {
+		background: hsla(222, 50%, 5%, 1);
 	}
 </style>

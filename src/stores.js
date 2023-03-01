@@ -3,7 +3,7 @@
 
 import { writable } from 'svelte/store'
 
-export const drugStorem = writable([
+export const drugStore = writable([
     [['GSK ANTACID SUSPENSION'], ['gsk'], []],
     [['HYDRAC P'], ['hydrac'], []],
     [['COUGH EXPECTORANT'], ['cough'], []],
@@ -17,7 +17,7 @@ export const drugStorem = writable([
     [['WINART FORTE7'], ['win7'], []],
 ])
 
-export const drugs = writable([
+export const drugProperties = writable([
     ['gsk', 'gsk', 'gsk antacid suspension', 500],
     ['hydrac', 'hy', 'Hydrac P', 300],
     ['cough', 'co', 'coughy', 900],
@@ -30,7 +30,20 @@ export const drugs = writable([
     ['winart6', 'win6', 'winart forte6', 400],
     ['winart7', 'win7', 'winart forte7', 400],
 ]);
+export const doubleLinerValue = writable(15.3 + 'rem')
+export const current = writable('foo')
+export const time = writable(new Date().toLocaleTimeString());
+export const fillColour = writable('hsla(222, 50%, 85%, 1)')
 
+//=============mwnuoptions
+// export const darkyLi = writable(1)
+// export const darkyNav = writable(1)
+// export const darkyP = writable(1)
+export const menuCompDarkProps = writable({
+    darkyLi: 1,
+    darkyNav: 1,
+    darkyP: 1
+})
 // export const drugStore = writable([])
 // export const drugStore_hydracP = writable([])
 // export const drugStore_jawasil = writable([])
